@@ -1,7 +1,13 @@
-FROM alpine:3.4
+FROM pipill/armhf-alpine:3.4
+
+RUN [ "cross-build-start" ]
+
 RUN apk --update upgrade \
     && apk --no-cache --no-progress add ca-certificates \
     && rm -rf /var/cache/apk/*
+
+RUN [ "cross-build-end" ]
+
 COPY traefik /usr/local/bin/
 COPY entrypoint.sh /
 EXPOSE 80
